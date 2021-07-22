@@ -32,7 +32,7 @@ jobs:
           cp vapoursynth/include/*.h TCanny/
           sed -i -e '/#include <V/y|<>|""|' TCanny/shared.hpp
       - name: Meson setup
-        run: meson setup builddir/
+        run: meson setup builddir/ -Db_vscrt=mt
       - name: Meson compile
         run: meson compile -C builddir/ -v
       - name: Upload artifact
