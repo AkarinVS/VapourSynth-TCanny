@@ -28,9 +28,9 @@ jobs:
       - name: download VS headers and patch header location
         shell: bash
         run: |
-          git clone https://github.com/vapoursynth/vapoursynth --depth=1 --branch R54
+          git clone https://github.com/AmusementClub/vapoursynth-classic --depth=1 --branch doodle2 vapoursynth
           cp vapoursynth/include/*.h TCanny/
-          sed -i -e '/#include <V/y|<>|""|' TCanny/shared.hpp
+          sed -i -e '/#include <V/y|<>|""|' TCanny/TCanny.h
       - name: Meson setup
         run: meson setup builddir/ -Db_vscrt=mt
       - name: Meson compile
