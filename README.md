@@ -5,7 +5,7 @@ Ported from AviSynth plugin http://bengal.missouri.edu/~kes25c/
 
 
 ## Usage
-    tcanny.TCanny(vnode clip[, float[] sigma=1.5, float[] sigma_v=sigma, float t_h=8.0, float t_l=1.0, int mode=0, int op=1, float scale=1.0, int opt=0, int[] planes=[0, 1, 2]])
+    tcanny.TCanny(vnode clip[, float[] sigma=1.5, float[] sigma_v=sigma, float t_h=8.0, float t_l=1.0, int mode=0, int op=1, float scale=5.1, float gmmax=50, int opt=0, int[] planes=[0, 1, 2]])
 
 - clip: Clip to process. Any format with either integer sample type of 8-16 bit depth or float sample type of 32 bit depth is supported.
 
@@ -32,6 +32,7 @@ Ported from AviSynth plugin http://bengal.missouri.edu/~kes25c/
   - 6 = the FDoG operator
 
 - scale: Multiplies the gradient by `scale`. This can be used to increase or decrease the intensity of edges in the output.
+- gmmax: for compatibility with previous versions. scale=255/gmmax. Cannot specify both `gmmax` and `scale`.
 
 - opt: Sets which cpu optimizations to use.
   - 0 = auto detect
