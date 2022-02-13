@@ -537,11 +537,17 @@ static void VS_CC tcannyCreate(const VSMap* in, VSMap* out, [[maybe_unused]] voi
             float gmmax = vsapi->mapGetFloatSaturated(in, "gmmax", 0, &err2);
             if (!err && !err2)
                 throw "can't specify both gmmax and scale"s;
-            else if (err && err2)
+            else if (err && err2) {
                 // Turns out preserving the old behavior is extremely important,
-                // so we intentionally revert the new default gmmax=255 to gmmax=50.
-                d->scale = 255.0 / 50.0;
-            else if (!err2)
+                // so we intentionally revert the new default to the previous behavior:
+                // gmmax=255 (mode 0) or gmmax=50 (mode 1).
+                if (d->mode == 0)
+                        d->scale = 1.0f;
+                else if (d->mode == 1)
+                        d->scale = 255.0f / 50.0;
+                else
+                        d->scale = 1.0f;
+            } else if (!err2)
                 d->scale = 255.0 / gmmax;
         }
 
