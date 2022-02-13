@@ -547,8 +547,12 @@ static void VS_CC tcannyCreate(const VSMap* in, VSMap* out, [[maybe_unused]] voi
                         d->scale = 255.0f / 50.0;
                 else
                         d->scale = 1.0f;
-            } else if (!err2)
+            } else if (!err2) {
+                // Previously, no matter the value of gmmax, mode = 0 always use 255.
+                if (d->mode == 0)
+                    gmmax = 255;
                 d->scale = 255.0 / gmmax;
+            }
         }
 
         auto opt{ vsapi->mapGetIntSaturated(in, "opt", 0, &err) };

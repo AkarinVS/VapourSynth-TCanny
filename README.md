@@ -32,7 +32,9 @@ Ported from AviSynth plugin http://bengal.missouri.edu/~kes25c/
   - 6 = the FDoG operator
 
 - scale: Multiplies the gradient by `scale`. This can be used to increase or decrease the intensity of edges in the output.
-- gmmax: for compatibility with previous versions. scale=255/gmmax. Cannot specify both `gmmax` and `scale`. For mode 0, the default scale=1.0 (gmmax=255) and for mode 1 the default scale=5.1 (gmmax=50).
+- gmmax: another way to set `scale`, preserved only for backward compatibility. `scale=255/gmmax`. Cannot specify both `gmmax` and `scale`. The behavior of setting `gmmax` is inconsistent and complicated for historical reasons:
+  - For mode 0, `gmmax` is ignored and 255 (scale=1.0) is always implied. (However, manually setting a different `scale` is still effective);
+  - For mode 1, `gmmax` defaults to 50 (scale=5.1).
 
 - opt: Sets which cpu optimizations to use.
   - 0 = auto detect
